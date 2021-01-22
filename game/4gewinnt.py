@@ -1,4 +1,5 @@
 from typing import List
+from random import randint
 
 class Field:
     def __init__(self):
@@ -17,9 +18,6 @@ class Field:
         pass
 
 class GUI:
-    def __init__(self):
-        pass
-
     def outputField(self, field: Field):
         pass
 
@@ -33,10 +31,26 @@ class GUI:
         pass
 
 class Player:
+    """
+    Aus der Klasse Player kann ein Objekt Spieler erstellt werden.
+
+    Ein Spieler kann entweder ein Mensch oder ein Computer sein.
+    Außerdem wird er durch seinen Namen und seinen Spielstein repräsentiert.
+
+    Attributes
+    ----------
+    name : str
+        Übernimmt den Namen des Spielers.
+    playerid : str
+        Legt den Spielstein bzw. das Symbol fest, welches den Spieler am Spielfeld repräsentiert.
+    gameMode: int
+        Legt fest, ob ein Spieler ein Mensch (Wert = 1) oder ein Computer (Wert = 2) ist. Andere Werte sind nicht zulässig. Die if-Schleife bei der Zuweisung von `gameMode` erzwingt eine gültige Eingabe.
+    """
     def __init__(self, name: str, playerid: str,  gameMode: int):
         self.__name = name
         self.__playerid = playerid
-        if gameMode == 1 or gameMode == 2: #Erzwingt eine gültige Eingabe. Gültig sind 1 für menschlichen Spieler und 2 für Computergegner
+        # Erzwingt eine gültige Eingabe. Gültig sind 1 für menschlichen Spieler und 2 für Computergegner.
+        if gameMode == 1 or gameMode == 2:
             self.__gameMode = gameMode
         else:
             print("Wähle einen gültigen Spielmodus. 1 = Mensch, 2 = Computer")
@@ -65,12 +79,32 @@ class Player:
         return self.__gameMode
 
     def playDraw(self, gui: GUI) -> int:
-        pass
+        """
+        Übergibt die Spalte.
+
+        Die Methode überprüft zuerst, ob der Spieler ein Mensch oder ein Computer ist.
+        Ist der Spieler ein Mensch, wird die gewählte Spalte übernommen.
+        Ist der Spieler ein Computer wird zufällig eine Spalte gewählt
+
+        Parameters
+        ----------
+        gui: GUI
+        Übergibt den Namen des GUI (graphical user interface) um dort die Methode `getDraw()`aufzurufen, wenn der Spieler ein Mensch ist.
+
+        Returns
+        -------
+        Spalte `col`
+
+        """
+        if self.__gameMode == 1:
+            col = gui.getDraw(self.__name)
+            return col
+        elif self.__gameMode == 2:
+            col = randint(1, 8)
+            print("Col: ", col)
+            return col
 
 class RuleSet:
-    def __init__(self):
-        pass
-
     def checkDraw(self, field: Field, col: int) -> bool:
         pass
 
@@ -91,13 +125,6 @@ class FourWinsGame:
 
     def startGame(self):
         pass
-
-
-
-
-
-
-
 
 
 
