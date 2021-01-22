@@ -27,7 +27,7 @@ class GUI:
     def getGameMode(self, name: str) -> int:
         pass
 
-    def getDraw(self, name: str) -> Position:
+    def getDraw(self, name: str):
         pass
 
 class Player:
@@ -53,7 +53,7 @@ class Player:
         if gameMode == 1 or gameMode == 2:
             self.__gameMode = gameMode
         else:
-            print("Wähle einen gültigen Spielmodus. 1 = Mensch, 2 = Computer")
+            raise ValueError("Wähle einen gültigen Spielmodus. 1 = Mensch, 2 = Computer")
 
     def __repr__(self):
         return f"Name: {self.__name}, Spielstein-ID: {self.__playerid}, Modus: {self.__gameMode}"
@@ -129,5 +129,5 @@ class FourWinsGame:
 
 
 if __name__ == '__main__':
-    Player1 = Player("test", "x", 1)
+    Player1 = Player("test", "x", 3)
     print(Player1)
