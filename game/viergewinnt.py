@@ -2,14 +2,50 @@ from typing import List
 from random import randint
 
 class Field:
+    """
+    In der Feld-Klasse befinden sich alle aktuellen Informationen zu dem Spielfeld.
+
+    Das Spielfeld wurde als Array (eine Liste aus Listen) umgesetzt. Die 6 Listen bestehen jeweils aus 7 str.
+    """
     def __init__(self):
-        pass
+        self.__fields = [[" ", " ", " ", " ", " ", " ", " "],
+                         [" ", " ", " ", " ", " ", " ", " "],
+                         [" ", " ", " ", " ", " ", " ", " "],
+                         [" ", " ", " ", " ", " ", " ", " "],
+                         [" ", " ", " ", " ", " ", " ", " "],
+                         [" ", " ", " ", " ", " ", " ", " "]]
 
     def getFields(self) -> List:
-        pass
+        return self.__fields
 
-    def setFields(self, col: int, value: int):
-        pass
+    def setFields(self, col: int, playerid: str):
+        """
+        Setzt einen Spielstein in eine Spalte.
+
+        Es wird bei jedem Spielzug darauf geachtet, dass der Spielstein nicht in der Luft schwebt und immer bis zum niedrigst-möglichen Punkt herunterfällt.
+        Parameters
+        ----------
+        col: int
+            Gibt die Spalte an, in die der Spielstein geworfen wird.
+
+        playerid: str
+            Gibt an welcher Spielstein geworfen wird.
+
+        Returns
+        -------
+        Nichts.
+        """
+        reihe = 0
+        geworfen = False
+        for list in reversed(self.__fields):
+            if geworfen == False:
+                if list[col] == " ":
+                    list[col] = str(playerid) #Stellt zusätzlich sicher, dass auch ein str eingetragen wird.
+                    reihe += 1
+                    geworfen = True
+                elif list[col] != " ":
+                    reihe += 1
+
 
     def getLastRow(self, col: int, row: int) -> int:
         pass
@@ -49,8 +85,7 @@ class Player:
     def __init__(self, name: str, playerid: str,  gameMode: int):
         self.__name = name
         self.__playerid = playerid
-        # Erzwingt eine gültige Eingabe. Gültig sind 1 für menschlichen Spieler und 2 für Computergegner.
-        if gameMode == 1 or gameMode == 2:
+        if gameMode == 1 or gameMode == 2: # Erzwingt eine gültige Eingabe. Gültig sind 1 für menschlichen Spieler und 2 für Computergegner.
             self.__gameMode = gameMode
         else:
             raise ValueError("Wähle einen gültigen Spielmodus. 1 = Mensch, 2 = Computer")
@@ -82,7 +117,7 @@ class Player:
         """
         Führt den Spielzug aus.
 
-        Die Methode überprüft zuerst, ob der Spieler ein Mensch oder ein Computer ist.
+        Die Methode überprüft zuerst, ob der Spieler ein Mensch (gameMode = 1) oder ein Computer (gameMode = 2) ist.
         Ist der Spieler ein Mensch, wird die gewählte Spalte übernommen.
         Ist der Spieler ein Computer wird zufällig eine Spalte gewählt
 
@@ -93,8 +128,7 @@ class Player:
 
         Returns
         -------
-        Spalte `col`
-
+        `col`
         """
         if self.__gameMode == 1:
             col = gui.getDraw(self.__name)
@@ -129,5 +163,48 @@ class FourWinsGame:
 
 
 if __name__ == '__main__':
-    Player1 = Player("test", "x", 3)
-    print(Player1)
+    # field = [[" ", " ", " ", " ", " ", " ", " "],
+    #                      [" ", " ", " ", " ", " ", " ", " "],
+    #                      [" ", " ", " ", " ", " ", " ", " "],
+    #                      [" ", " ", " ", " ", " ", " ", " "],
+    #                      [" ", " ", " ", " ", " ", " ", " "],
+    #                      [" ", " ", " ", " ", " ", " ", " "]]
+    # # print(len(field))
+    # # x = list(range(len(field)-1, -1, -1))
+    # # print(x)
+    #
+    #
+    # def ausgabe(field):
+    #     for list in field:
+    #         print(list)
+    #
+    # ausgabe(field)
+    # def setdraw(col, playerid):
+    #     reihe = 0
+    #     geworfen = False
+    #     for list in reversed(field):
+    #         if geworfen == False:
+    #             if list[col] == " ":
+    #                 list[col] = str(playerid)
+    #                 reihe += 1
+    #                 print(reihe)
+    #                 geworfen = True
+    #             elif list[col] != " ":
+    #                 reihe += 1
+    #
+    #
+    # setdraw(0, "X")
+    # ausgabe(field)
+    # setdraw(0, "X")
+    # ausgabe(field)
+    # setdraw(0, "X")
+    # ausgabe(field)
+    # setdraw(1, "X")
+    # ausgabe(field)
+    feld = Field()
+    print(feld)
+    print(feld.getFields())
+    feld.setFields(1, "X")
+    print(feld.getFields())
+
+
