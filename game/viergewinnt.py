@@ -163,6 +163,7 @@ class FourWinsGame:
 
 
 if __name__ == '__main__':
+    pass
     # field = [[" ", " ", " ", " ", " ", " ", " "],
     #                      [" ", " ", " ", " ", " ", " ", " "],
     #                      [" ", " ", " ", " ", " ", " ", " "],
@@ -201,10 +202,8 @@ if __name__ == '__main__':
     # ausgabe(field)
     # setdraw(1, "X")
     # ausgabe(field)
-    feld = Field()
-    print(feld)
-    print(feld.getFields())
-    feld.setFields(1, "X")
-    print(feld.getFields())
-
-
+    # feld = Field()
+    # print(feld)
+    # print(feld.getFields())
+    # feld.setFields(1, "X")
+    # print(feld.getFields())
