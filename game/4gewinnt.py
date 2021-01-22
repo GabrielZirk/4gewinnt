@@ -80,7 +80,7 @@ class Player:
 
     def playDraw(self, gui: GUI) -> int:
         """
-        Übergibt die Spalte.
+        Führt den Spielzug aus.
 
         Die Methode überprüft zuerst, ob der Spieler ein Mensch oder ein Computer ist.
         Ist der Spieler ein Mensch, wird die gewählte Spalte übernommen.
