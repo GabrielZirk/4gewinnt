@@ -101,7 +101,7 @@ class GUI:
         spielmodus = 0
         while spielmodus not in valid_modes:
             try:
-                spielmodus = int(input(f'{name.capitalize()} bist du ein Mensch (wähle "1") oder ein Computer (wähle "2"): '))
+                spielmodus = int(input(f'{name.capitalize()} bist du ein Mensch (wähle "1") oder ein Computer (wähle "2")?: '))
                 if spielmodus not in valid_modes:
                     print('Achtung: Wähle "1" für Mensch und "2" für Computer!')
             except ValueError:
