@@ -286,19 +286,4 @@ class FourWinsGame:
 
 
 if __name__ == '__main__':
-    feld1 = Field()
-    gui1 = GUI()
-    ruleset1 = RuleSet()
-    #gui1.outputField(feld1)
-    #print(ruleset1.checkGameOver(feld1))
-    for list in feld1.getFields():
-        for i in range(1, 8):
-            feld1.setFields(i, "X")
-            #print(feld1.getLastCol())
-            #print(feld1.getLastRow())
-    gui1.outputField(feld1)
-    print(ruleset1.checkGameOver(feld1))
-
-
-
-
+    pass
