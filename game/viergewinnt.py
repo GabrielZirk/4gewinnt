@@ -64,10 +64,10 @@ class Field:
 class GUI:
     def outputField(self, field: Field):
         """Gibt das Spielfeld aus"""
-        for list in feld.getFields():
+        for list in field.getFields():
             print(" | ", list[0], " | ", list[1], " | ", list[2], " | ", list[3], " | ", list[4], " | ", list[5], " | ",
-                  list[6])
-            print(" |-----------------------------------|")
+                  list[6], " | ")
+            print(" |-----------------------------------------|")
 
     def getName(self, spielernr: int) -> str:
         """
@@ -217,12 +217,35 @@ class RuleSet:
         else:
             return True
 
-    def checkPlayer(self, field: Field, player: Player) -> bool:
+    def checkPlayerWon(self, field: Field, player: Player) -> bool:
         pass
 
     def checkGameOver(self, field: Field) -> bool:
-        pass
+        """
+        Überprüft, ob das Spielfeld voll ist.
 
+        Solange noch freie Felder am Spielfeld sind, wird False geliefert. Ist das Spielfeld voll wird True geliefert.
+        Parameters
+        ----------
+        field: Field
+            Das übergebene Spielfeld wird überprüft.
+
+        Returns
+        -------
+        True oder False.
+
+        """
+        counter_befuellte_felder = 0
+        spielfeld = field.getFields()
+        for list in spielfeld:
+            for item in list:
+                if item != " ":
+                    counter_befuellte_felder += 1
+        print(counter_befuellte_felder)
+        if counter_befuellte_felder < 42:
+            return False
+        else:
+            return True
 
 class FourWinsGame:
     def __init__(self,player1: Player, player2: Player):
@@ -238,92 +261,18 @@ class FourWinsGame:
 
 
 if __name__ == '__main__':
-    feld = Field()
-    #print(feld)
-    #print(feld.getFields())
-    feld.setFields(1, "X")
-    #print(type(feld.getFields()))
-    #gui = GUI()
-    #gui.outputField(feld)
-    #gui.getName(1)
-    #gui.getGameMode("gabi")
-    #gui.getDraw("Gabi")
-    # gui.getName(2)
-    print(type(feld.getFields()))
-
-    def checkpossibledraw(field, col):
-        spielfeld = field.getFields()
-        print(spielfeld[0])
-        if spielfeld[0][col-1] != " ":
-            return False
-        else:
-            return True
-    print(checkpossibledraw(feld, 1))
-    feld.setFields(1, "X")
-    print(checkpossibledraw(feld, 1))
-    feld.setFields(1, "X")
-    print(checkpossibledraw(feld, 1))
-    feld.setFields(1, "X")
-    print(checkpossibledraw(feld, 1))
-    feld.setFields(1, "X")
-    print(checkpossibledraw(feld, 1))
-    feld.setFields(1, "X")
-    print(checkpossibledraw(feld, 1))
-    feld.setFields(1, "X")
-    print(checkpossibledraw(feld, 1))
-    feld.setFields(1, "X")
-    print(checkpossibledraw(feld, 1))
+    feld1 = Field()
+    gui1 = GUI()
+    ruleset1 = RuleSet()
+    gui1.outputField(feld1)
+    print(ruleset1.checkGameOver(feld1))
+    for list in feld1.getFields():
+        for i in range(1, 8):
+            print(i)
+            feld1.setFields(i, "X")
+    gui1.outputField(feld1)
+    print(ruleset1.checkGameOver(feld1))
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-    # field = [[" ", " ", " ", " ", " ", " ", " "],
-    #                      [" ", " ", " ", " ", " ", " ", " "],
-    #                      [" ", " ", " ", " ", " ", " ", " "],
-    #                      [" ", " ", " ", " ", " ", " ", " "],
-    #                      [" ", " ", " ", " ", " ", " ", " "],
-    #                      [" ", " ", " ", " ", " ", " ", " "]]
-    # # print(len(field))
-    # # x = list(range(len(field)-1, -1, -1))
-    # # print(x)
-    #
-    #
-    # def ausgabe(field):
-    #     for list in field:
-    #         print(list)
-    #
-    # ausgabe(field)
-    # def setdraw(col, playerid):
-    #     reihe = 0
-    #     geworfen = False
-    #     for list in reversed(field):
-    #         if geworfen == False:
-    #             if list[col] == " ":
-    #                 list[col] = str(playerid)
-    #                 reihe += 1
-    #                 print(reihe)
-    #                 geworfen = True
-    #             elif list[col] != " ":
-    #                 reihe += 1
-    #
-    #
-    # setdraw(0, "X")
-    # ausgabe(field)
-    # setdraw(0, "X")
-    # ausgabe(field)
-    # setdraw(0, "X")
-    # ausgabe(field)
-    # setdraw(1, "X")
-    # ausgabe(field)

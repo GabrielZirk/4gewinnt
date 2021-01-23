@@ -71,14 +71,6 @@ class ViergewinntTests(unittest.TestCase):
                                 ["O", " ", " ", " ", " ", " ", " "],
                                 ["X", " ", " ", " ", " ", " ", " "],
                                 ["X", " ", " ", " ", " ", " ", " "]])
-        self.Feld1.setFields(1, "O")
-        erg5 = self.Feld1.getFields()
-        self.assertEqual(erg5, [["O", " ", " ", " ", " ", " ", " "],
-                                ["O", " ", " ", " ", " ", " ", " "],
-                                ["O", " ", " ", " ", " ", " ", " "],
-                                ["O", " ", " ", " ", " ", " ", " "],
-                                ["X", " ", " ", " ", " ", " ", " "],
-                                ["X", " ", " ", " ", " ", " ", " "]])
 
     def test_valid_col(self):
         """
@@ -93,7 +85,7 @@ class ViergewinntTests(unittest.TestCase):
         self.assertRaises(TypeError, self.Feld1.setFields, "1", "X")
 
     ###################################################################
-    # Tests der Klasse Field
+    # Tests der Klasse GUI
     ###################################################################
     def test_valid_gameMode(self):
         self.assertEquals(str, type(self.gui1.getName(1)))
@@ -101,6 +93,39 @@ class ViergewinntTests(unittest.TestCase):
     def test_gameMode(self):
         self.assertEquals(int, type(self.gui1.getGameMode("testuser")))
 
+    ###################################################################
+    # Tests der Klasse RuleSet
+    ###################################################################
+    def test_checkDraw(self):
+        """
+        Überprüft, ob ein Zug möglich ist.
+
+        Ein Zug ist nicht möglich, wenn die Reihe schon voll ist.
+        Returns
+        -------
+        Testergebnis
+        """
+        self.Feld1.setFields(1, "X")
+        self.assertTrue(self.ruleset1.checkDraw(self.Feld1, 0))
+        self.Feld1.setFields(1, "X")
+        self.assertTrue(self.ruleset1.checkDraw(self.Feld1, 0))
+        self.Feld1.setFields(1, "X")
+        self.assertTrue(self.ruleset1.checkDraw(self.Feld1, 0))
+        self.Feld1.setFields(1, "X")
+        self.assertTrue(self.ruleset1.checkDraw(self.Feld1, 0))
+        self.Feld1.setFields(1, "X")
+        self.assertTrue(self.ruleset1.checkDraw(self.Feld1, 0))
+        self.Feld1.setFields(1, "X")
+        self.assertFalse(self.ruleset1.checkDraw(self.Feld1, 0))
+
+    def test_checkGameOver(self):
+        self.gui1.outputField(self.Feld1)
+        self.assertFalse(self.ruleset1.checkGameOver(self.Feld1))
+        for _ in self.Feld1.getFields():
+            for i in range(1, 8):
+                self.Feld1.setFields(i, "X")
+        self.gui1.outputField(self.Feld1)
+        self.assertTrue(self.ruleset1.checkGameOver(self.Feld1))
 
 if __name__ == '__main__':
     unittest.main()
