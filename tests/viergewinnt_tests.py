@@ -93,6 +93,12 @@ class ViergewinntTests(unittest.TestCase):
     def test_gameMode(self):
         self.assertEquals(int, type(self.gui1.getGameMode("testuser")))
 
+    def test_getLastRow(self):
+        self.Feld1.setFields(1, "X")
+        self.assertEqual(self.Feld1.getLastRow(), 1)
+        self.Feld1.setFields(1, "O")
+        self.assertEqual(self.Feld1.getLastRow(), 2)
+
     ###################################################################
     # Tests der Klasse RuleSet
     ###################################################################
@@ -119,12 +125,21 @@ class ViergewinntTests(unittest.TestCase):
         self.assertFalse(self.ruleset1.checkDraw(self.Feld1, 0))
 
     def test_checkGameOver(self):
-        self.gui1.outputField(self.Feld1)
+        """
+        Überprüft, ob es noch freie Felder auf dem Spielfeld sind.
+
+        Befinden sich noch leere Felder auf dem Spielfeld wird False übergeben, ist das Spielfeld voll True.
+
+        Returns
+        -------
+        Testergebnis
+        """
+        #self.gui1.outputField(self.Feld1)
         self.assertFalse(self.ruleset1.checkGameOver(self.Feld1))
         for _ in self.Feld1.getFields():
             for i in range(1, 8):
                 self.Feld1.setFields(i, "X")
-        self.gui1.outputField(self.Feld1)
+        #self.gui1.outputField(self.Feld1)
         self.assertTrue(self.ruleset1.checkGameOver(self.Feld1))
 
 if __name__ == '__main__':

@@ -14,6 +14,8 @@ class Field:
                          [" ", " ", " ", " ", " ", " ", " "],
                          [" ", " ", " ", " ", " ", " ", " "],
                          [" ", " ", " ", " ", " ", " ", " "]]
+        self.__letzte_bespielte_spalte = None
+        self.__letzte_bespielte_reihe = None
 
     def getFields(self) -> List:
         return self.__fields
@@ -35,6 +37,7 @@ class Field:
         -------
         Nichts.
         """
+        self.__letzte_bespielte_spalte = col-1
         if type(col) != int: #Stellt sicher, dass nur ganze Zahlen übergeben werden.
             raise TypeError("Nur ganze Zahlen von 1 bis 7 sind erlaubt.")
 
@@ -49,17 +52,39 @@ class Field:
             if geworfen == False:
                 if list[col-1] == " ":
                     list[col-1] = str(playerid) #Stellt  sicher, dass auch ein str eingetragen wird.
+                    #print(reihe)
                     reihe += 1
+                    self.__letzte_bespielte_reihe = reihe
                     geworfen = True
                 elif list[col-1] != " ":
                     reihe += 1
+                    self.__letzte_bespielte_reihe = reihe
 
 
-    def getLastRow(self, col: int, row: int) -> int:
-        pass
+    def getLastRow(self) -> int:
+        """
+        Gibt die letzte bespielte Reihe aus.
+
+        Die Reihenzählung beginnt von unten mit 1 und geht nach oben hin bis 6.
+
+        Returns
+        -------
+        int, Reihennummer
+
+        """
+        return self.__letzte_bespielte_reihe
 
     def getLastCol(self) -> int:
-        pass
+        """
+        Gibt die letzte bespielte Spalte aus.
+
+        Die Spaltenzählung beginng von links mit 0 (Python Indexierung).
+
+        Returns
+        -------
+        int, Spaltennummer
+        """
+        return self.__letzte_bespielte_spalte
 
 class GUI:
     def outputField(self, field: Field):
@@ -188,7 +213,7 @@ class Player:
             spalte = gui.getDraw(self.__name)
             return spalte
         elif self.__gameMode == 2:
-            spalte = randint(1, 8)
+            spalte = randint(0, 8)
             print("Spalte: ", spalte)
             return spalte
 
@@ -241,7 +266,7 @@ class RuleSet:
             for item in list:
                 if item != " ":
                     counter_befuellte_felder += 1
-        print(counter_befuellte_felder)
+        #print(counter_befuellte_felder)
         if counter_befuellte_felder < 42:
             return False
         else:
@@ -264,12 +289,13 @@ if __name__ == '__main__':
     feld1 = Field()
     gui1 = GUI()
     ruleset1 = RuleSet()
-    gui1.outputField(feld1)
-    print(ruleset1.checkGameOver(feld1))
+    #gui1.outputField(feld1)
+    #print(ruleset1.checkGameOver(feld1))
     for list in feld1.getFields():
         for i in range(1, 8):
-            print(i)
             feld1.setFields(i, "X")
+            #print(feld1.getLastCol())
+            #print(feld1.getLastRow())
     gui1.outputField(feld1)
     print(ruleset1.checkGameOver(feld1))
 
