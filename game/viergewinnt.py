@@ -100,17 +100,23 @@ class GUI:
         valid_modes = [1, 2]
         spielmodus = 0
         while spielmodus not in valid_modes:
-            spielmodus = int(input(f'{name.capitalize()} bist du ein Mensch (wähle "1") oder ein Computer (wähle "2"): '))
-            if spielmodus not in valid_modes:
-                print('Achtung: Wähle "1" für Mensch und "2" für Compouter!')
-        return spielmodus
+            try:
+                spielmodus = int(input(f'{name.capitalize()} bist du ein Mensch (wähle "1") oder ein Computer (wähle "2"): '))
+                if spielmodus not in valid_modes:
+                    print('Achtung: Wähle "1" für Mensch und "2" für Computer!')
+            except ValueError:
+                print('Achtung: Wähle "1" für Mensch und "2" für Computer!')
+        return int(spielmodus)
 
     def getDraw(self, name: str):
         spalte = 0
         valid_cols = [1, 2, 3, 4, 5, 6, 7]
         while spalte not in valid_cols:
-            spalte = int(input(f'{name.capitalize()} in welche Spalte möchtest du werfen? '))
-            if spalte not in valid_cols:
+            try:
+                spalte = int(input(f'{name.capitalize()} in welche Spalte möchtest du werfen? '))
+                if spalte not in valid_cols:
+                    print("Achtung: Wähle eine Spalte von 1 bis 7!")
+            except ValueError:
                 print("Achtung: Wähle eine Spalte von 1 bis 7!")
         return spalte - 1
 
@@ -188,7 +194,28 @@ class Player:
 
 class RuleSet:
     def checkDraw(self, field: Field, col: int) -> bool:
-        pass
+        """
+        Überprüft, ob ein Spielzug möglich ist.
+
+        Ein Spielzug ist nicht möglich, wenn die letzte Reihe der gewählten Spalte schon mit einem Spielstein belegt ist.
+
+        Parameters
+        ----------
+        field: Field
+            Übergibt das Spielfeld.
+        col: int
+            Übergibt die Spalte in die geworfen werden soll.
+
+        Returns
+        -------
+        True oder False
+
+        """
+        spielfeld = field.getFields()
+        if spielfeld[0][col] != " ":
+            return False
+        else:
+            return True
 
     def checkPlayer(self, field: Field, player: Player) -> bool:
         pass
@@ -216,11 +243,38 @@ if __name__ == '__main__':
     #print(feld.getFields())
     feld.setFields(1, "X")
     #print(type(feld.getFields()))
-    gui = GUI()
+    #gui = GUI()
     #gui.outputField(feld)
     #gui.getName(1)
     #gui.getGameMode("gabi")
-    gui.getDraw("Gabi")
+    #gui.getDraw("Gabi")
+    # gui.getName(2)
+    print(type(feld.getFields()))
+
+    def checkpossibledraw(field, col):
+        spielfeld = field.getFields()
+        print(spielfeld[0])
+        if spielfeld[0][col-1] != " ":
+            return False
+        else:
+            return True
+    print(checkpossibledraw(feld, 1))
+    feld.setFields(1, "X")
+    print(checkpossibledraw(feld, 1))
+    feld.setFields(1, "X")
+    print(checkpossibledraw(feld, 1))
+    feld.setFields(1, "X")
+    print(checkpossibledraw(feld, 1))
+    feld.setFields(1, "X")
+    print(checkpossibledraw(feld, 1))
+    feld.setFields(1, "X")
+    print(checkpossibledraw(feld, 1))
+    feld.setFields(1, "X")
+    print(checkpossibledraw(feld, 1))
+    feld.setFields(1, "X")
+    print(checkpossibledraw(feld, 1))
+
+
 
 
 
