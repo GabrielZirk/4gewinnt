@@ -101,10 +101,18 @@ class GUI:
         spielmodus = 0
         while spielmodus not in valid_modes:
             spielmodus = int(input(f'{name.capitalize()} bist du ein Mensch (wähle "1") oder ein Computer (wähle "2"): '))
+            if spielmodus not in valid_modes:
+                print('Achtung: Wähle "1" für Mensch und "2" für Compouter!')
         return spielmodus
 
     def getDraw(self, name: str):
-        pass
+        spalte = 0
+        valid_cols = [1, 2, 3, 4, 5, 6, 7]
+        while spalte not in valid_cols:
+            spalte = int(input(f'{name.capitalize()} in welche Spalte möchtest du werfen? '))
+            if spalte not in valid_cols:
+                print("Achtung: Wähle eine Spalte von 1 bis 7!")
+        return spalte - 1
 
 class Player:
     """
@@ -211,7 +219,8 @@ if __name__ == '__main__':
     gui = GUI()
     #gui.outputField(feld)
     #gui.getName(1)
-    gui.getGameMode("gabi")
+    #gui.getGameMode("gabi")
+    gui.getDraw("Gabi")
 
 
 
