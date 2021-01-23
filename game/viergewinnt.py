@@ -87,6 +87,10 @@ class Field:
         return self.__letzte_bespielte_spalte
 
 class GUI:
+    """
+    Erzeugt das graphical user interface.
+    """
+
     def outputField(self, field: Field):
         """Gibt das Spielfeld aus"""
         for list in field.getFields():
@@ -218,6 +222,10 @@ class Player:
             return spalte
 
 class RuleSet:
+    """
+    Erzeugt das Regelwerk des Spiels 4gewinnt.
+    """
+
     def checkDraw(self, field: Field, col: int) -> bool:
         """
         Überprüft, ob ein Spielzug möglich ist.
@@ -273,6 +281,10 @@ class RuleSet:
             return True
 
 class FourWinsGame:
+    """
+    Erstellt das Spiel.
+    """
+
     def __init__(self,player1: Player, player2: Player):
         self.__player1 = player1
         self.__player2 = player2
