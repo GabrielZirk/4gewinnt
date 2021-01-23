@@ -18,11 +18,11 @@ class Field:
     def getFields(self) -> List:
         return self.__fields
 
-    def setFields(self, col: int, playerid: str):
+    def setFields(self, col: int, playerid: str): #alles in eine while true schleife packen, damit der spielzug so lange wiederholt wird bis ein korrekter wert eingegeben wurde?
         """
         Setzt einen Spielstein in eine Spalte.
 
-        Es wird bei jedem Spielzug darauf geachtet, dass der Spielstein nicht in der Luft schwebt und immer bis zum niedrigst-möglichen Punkt herunterfällt.
+        Mögliche Spalten sind 1-7 (nur int). Es wird bei jedem Spielzug darauf geachtet, dass der Spielstein nicht in der Luft schwebt und immer bis zum niedrigst-möglichen Punkt herunterfällt.
         Parameters
         ----------
         col: int
@@ -35,15 +35,23 @@ class Field:
         -------
         Nichts.
         """
+        if type(col) != int: #Stellt sicher, dass nur ganze Zahlen übergeben werden.
+            raise TypeError("Nur ganze Zahlen von 1 bis 7 sind erlaubt.")
+
+        valid_cols = [1, 2, 3, 4, 5, 6, 7]
+        if col not in valid_cols: #Stellt sicher, dass nur ganze Zahlen von 1 bis 7 übergeben werden können.
+            raise ValueError("Wähle eine gültige Spalte (1 - 7).")
+
+
         reihe = 0
         geworfen = False
         for list in reversed(self.__fields):
             if geworfen == False:
-                if list[col] == " ":
-                    list[col] = str(playerid) #Stellt zusätzlich sicher, dass auch ein str eingetragen wird.
+                if list[col-1] == " ":
+                    list[col-1] = str(playerid) #Stellt  sicher, dass auch ein str eingetragen wird.
                     reihe += 1
                     geworfen = True
-                elif list[col] != " ":
+                elif list[col-1] != " ":
                     reihe += 1
 
 
@@ -55,13 +63,45 @@ class Field:
 
 class GUI:
     def outputField(self, field: Field):
-        pass
+        """Gibt das Spielfeld aus"""
+        for list in feld.getFields():
+            print(" | ", list[0], " | ", list[1], " | ", list[2], " | ", list[3], " | ", list[4], " | ", list[5], " | ",
+                  list[6])
+            print(" |-----------------------------------|")
 
-    def getName(self, playerNr: int) -> str:
-        pass
+    def getName(self, spielernr: int) -> str:
+        """
+        Fordert die Spieler auf ihre Namen einzugeben.
+        Parameters
+        ----------
+        spielernr: int
+
+        Returns
+        -------
+        Name des Spielers
+        """
+        name = input(f"Name des Spielers {spielernr}: ")
+        return name
 
     def getGameMode(self, name: str) -> int:
-        pass
+        """
+        Die Methode fordert beim Spieler die Eingabe des Spielmodus an.
+
+        Die Aufforderung wird so lange wiederholt, bis eine gültige Eingabe (1 = Mensch, 2 = Computer) erfolgt ist.
+        Parameters
+        ----------
+        name: str
+            Der Name des Spielers würd übergeben, damit er angesprochen werden kann.
+
+        Returns
+        -------
+        Spielmodus
+        """
+        valid_modes = [1, 2]
+        spielmodus = 0
+        while spielmodus not in valid_modes:
+            spielmodus = int(input(f'{name.capitalize()} bist du ein Mensch (wähle "1") oder ein Computer (wähle "2"): '))
+        return spielmodus
 
     def getDraw(self, name: str):
         pass
@@ -124,19 +164,19 @@ class Player:
         Parameters
         ----------
         gui: GUI
-        Übergibt den Namen des GUI (graphical user interface) um dort die Methode `getDraw()`aufzurufen, wenn der Spieler ein Mensch ist.
+        Übergibt den Namen des GUI (graphical user interface), um dort die Methode `getDraw()`aufzurufen, wenn der Spieler ein Mensch ist.
 
         Returns
         -------
-        `col`
+        `spalte`
         """
         if self.__gameMode == 1:
-            col = gui.getDraw(self.__name)
-            return col
+            spalte = gui.getDraw(self.__name)
+            return spalte
         elif self.__gameMode == 2:
-            col = randint(1, 8)
-            print("Col: ", col)
-            return col
+            spalte = randint(1, 8)
+            print("Spalte: ", spalte)
+            return spalte
 
 class RuleSet:
     def checkDraw(self, field: Field, col: int) -> bool:
@@ -163,7 +203,29 @@ class FourWinsGame:
 
 
 if __name__ == '__main__':
-    pass
+    feld = Field()
+    #print(feld)
+    #print(feld.getFields())
+    feld.setFields(1, "X")
+    #print(type(feld.getFields()))
+    gui = GUI()
+    #gui.outputField(feld)
+    #gui.getName(1)
+    gui.getGameMode("gabi")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     # field = [[" ", " ", " ", " ", " ", " ", " "],
     #                      [" ", " ", " ", " ", " ", " ", " "],
     #                      [" ", " ", " ", " ", " ", " ", " "],
@@ -202,8 +264,3 @@ if __name__ == '__main__':
     # ausgabe(field)
     # setdraw(1, "X")
     # ausgabe(field)
-    # feld = Field()
-    # print(feld)
-    # print(feld.getFields())
-    # feld.setFields(1, "X")
-    # print(feld.getFields())

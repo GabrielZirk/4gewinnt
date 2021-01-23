@@ -27,7 +27,13 @@ class FieldsTest(unittest.TestCase):
         self.Feld1 = Field()
 
     def test_setField(self):
-        self.Feld1.setFields(0, "X")
+        """
+        Überprüft, ob die Spielsteine korrekt gesetzt werden.
+        Returns
+        -------
+        Testergebnis
+        """
+        self.Feld1.setFields(1, "X")
         erg1 = self.Feld1.getFields()
         self.assertEqual(erg1, [[" ", " ", " ", " ", " ", " ", " "],
                          [" ", " ", " ", " ", " ", " ", " "],
@@ -35,7 +41,7 @@ class FieldsTest(unittest.TestCase):
                          [" ", " ", " ", " ", " ", " ", " "],
                          [" ", " ", " ", " ", " ", " ", " "],
                          ["X", " ", " ", " ", " ", " ", " "]])
-        self.Feld1.setFields(0, "X")
+        self.Feld1.setFields(1, "X")
         erg2 = self.Feld1.getFields()
         self.assertEqual(erg2, [[" ", " ", " ", " ", " ", " ", " "],
                                 [" ", " ", " ", " ", " ", " ", " "],
@@ -43,9 +49,9 @@ class FieldsTest(unittest.TestCase):
                                 [" ", " ", " ", " ", " ", " ", " "],
                                 ["X", " ", " ", " ", " ", " ", " "],
                                 ["X", " ", " ", " ", " ", " ", " "]])
-        self.Feld1.setFields(0, "O")
-        self.Feld1.setFields(0, "O")
-        self.Feld1.setFields(0, "O")
+        self.Feld1.setFields(1, "O")
+        self.Feld1.setFields(1, "O")
+        self.Feld1.setFields(1, "O")
         erg3 = self.Feld1.getFields()
         self.assertEqual(erg3, [[" ", " ", " ", " ", " ", " ", " "],
                                 ["O", " ", " ", " ", " ", " ", " "],
@@ -53,7 +59,7 @@ class FieldsTest(unittest.TestCase):
                                 ["O", " ", " ", " ", " ", " ", " "],
                                 ["X", " ", " ", " ", " ", " ", " "],
                                 ["X", " ", " ", " ", " ", " ", " "]])
-        self.Feld1.setFields(0, "O")
+        self.Feld1.setFields(1, "O")
         erg4 = self.Feld1.getFields()
         self.assertEqual(erg4, [["O", " ", " ", " ", " ", " ", " "],
                                 ["O", " ", " ", " ", " ", " ", " "],
@@ -61,7 +67,7 @@ class FieldsTest(unittest.TestCase):
                                 ["O", " ", " ", " ", " ", " ", " "],
                                 ["X", " ", " ", " ", " ", " ", " "],
                                 ["X", " ", " ", " ", " ", " ", " "]])
-        self.Feld1.setFields(0, "O")
+        self.Feld1.setFields(1, "O")
         erg5 = self.Feld1.getFields()
         self.assertEqual(erg5, [["O", " ", " ", " ", " ", " ", " "],
                                 ["O", " ", " ", " ", " ", " ", " "],
@@ -70,6 +76,17 @@ class FieldsTest(unittest.TestCase):
                                 ["X", " ", " ", " ", " ", " ", " "],
                                 ["X", " ", " ", " ", " ", " ", " "]])
 
+    def test_valid_col(self):
+        """
+        Überprüft, ob ein ValueError angezeigt wird, wenn nicht 1, 2, 3, 4, 5, 6, oder 7 als Spaltenwert übergeben werden.
+        Returns
+        -------
+        Testergebnis
+
+        """
+        self.assertRaises(ValueError, self.Feld1.setFields, 0, "X")
+        self.assertRaises(ValueError, self.Feld1.setFields, 8, "X")
+        self.assertRaises(TypeError, self.Feld1.setFields, "1", "X")
 
 if __name__ == '__main__':
     unittest.main()
