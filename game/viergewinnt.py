@@ -16,8 +16,19 @@ class Field:
                          [" ", " ", " ", " ", " ", " ", " "]]
         self.__letzte_bespielte_spalte = None
         self.__letzte_bespielte_reihe = None
+    #     self.__last_player = None Nicht sicher, ob ich die brauchen werde
+    #
+    # def getLastPlayer(self):
+    #     return self.__last_player
 
     def getFields(self) -> List:
+        """
+        Übergibt das Spielfeld
+
+        Returns
+        -------
+        List [List] - self.__fields
+        """
         return self.__fields
 
     def setFields(self, col: int, playerid: str): #alles in eine while true schleife packen, damit der spielzug so lange wiederholt wird bis ein korrekter wert eingegeben wurde?
@@ -251,7 +262,39 @@ class RuleSet:
             return True
 
     def checkPlayerWon(self, field: Field, player: Player) -> bool:
-        pass
+        last_set_row = field.getLastRow()
+        # print("letzte gesetzte reihe: ",last_set_row)
+        last_set_col = field.getLastCol()
+        # print("letzte gesetzte spalte :", last_set_col)
+        spielfeld = field.getFields()
+        player_id = player.playerid
+
+        #Überprüft die Reihen nach 4 aufeinandernfolgenden Spielsteinen des Spielers
+        counter_reihe = 0
+        for pos_reihe in range(0, 7):
+            # print(spielfeld[0][0])
+            if spielfeld[last_set_row][pos_reihe] == player_id:
+                counter_reihe += 1
+                if counter_reihe == 4:
+                    return True
+            elif spielfeld[last_set_row][pos_reihe] != player_id:
+                counter_reihe = 0
+                print(counter_reihe)
+
+
+        # Überprüft die Spalten nach 4 aufeinandernfolgenden Spielsteinen des Spielers
+        counter_spalte = 0
+        for pos_spalte in range(0, 6):
+            if spielfeld[pos_spalte][last_set_col]:
+                counter_spalte += 1
+            else:
+                counter_spalte = 0
+            if counter_spalte == 4:
+                return True
+
+        return False
+
+
 
     def checkGameOver(self, field: Field) -> bool:
         """
@@ -285,9 +328,9 @@ class FourWinsGame:
     Erstellt das Spiel.
     """
 
-    def __init__(self,player1: Player, player2: Player):
-        self.__player1 = player1
-        self.__player2 = player2
+    def __init__(self,playerid1: Player, playerid2: Player):
+        self.__player1 = playerid1
+        self.__player2 = playerid2
 
     def initializeGame(self):
         pass

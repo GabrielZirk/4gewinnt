@@ -142,5 +142,12 @@ class ViergewinntTests(unittest.TestCase):
         #self.gui1.outputField(self.Feld1)
         self.assertTrue(self.ruleset1.checkGameOver(self.Feld1))
 
+    def test_checkPlayerWon(self):
+        self.gui1.outputField(self.Feld1)
+        self.Feld1.setFields(1, "X")
+        self.gui1.outputField(self.Feld1)
+        self.ruleset1.checkPlayerWon(self.Feld1, self.Player1)
+        self.assertFalse(self.ruleset1.checkPlayerWon(self.Feld1, self.Player1))
+
 if __name__ == '__main__':
     unittest.main()
