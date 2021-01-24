@@ -65,7 +65,7 @@ class Field:
         """
         Gibt die letzte bespielte Reihe aus.
 
-        Die Reihenzählung beginnt von unten mit 1 und geht nach oben hin bis 6.
+        Die Reihenzählung beginnt von oben mit 0 und geht nach unten bis 5 (python Zählweise).
 
         Returns
         -------
