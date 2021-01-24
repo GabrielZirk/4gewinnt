@@ -48,11 +48,11 @@ class Field:
         -------
         Nichts.
         """
-        self.__letzte_bespielte_spalte = col-1
+        self.__letzte_bespielte_spalte = col
         if type(col) != int: #Stellt sicher, dass nur ganze Zahlen übergeben werden.
             raise TypeError("Nur ganze Zahlen von 1 bis 7 sind erlaubt.")
 
-        valid_cols = [1, 2, 3, 4, 5, 6, 7]
+        valid_cols = [0, 1, 2, 3, 4, 5, 6]
         if col not in valid_cols: #Stellt sicher, dass nur ganze Zahlen von 1 bis 7 übergeben werden können.
             raise ValueError("Wähle eine gültige Spalte (1 - 7).")
 
@@ -61,13 +61,13 @@ class Field:
         geworfen = False
         for list in reversed(self.__fields):
             if geworfen == False:
-                if list[col-1] == " ":
-                    list[col-1] = str(playerid) #Stellt  sicher, dass auch ein str eingetragen wird.
+                if list[col] == " ":
+                    list[col] = str(playerid) #Stellt  sicher, dass auch ein str eingetragen wird.
                     #print(reihe)
                     #reihe += 1
                     self.__letzte_bespielte_reihe = reihe
                     geworfen = True
-                elif list[col-1] != " ":
+                elif list[col] != " ":
                     reihe -= 1
                     self.__letzte_bespielte_reihe = reihe
 
@@ -232,7 +232,7 @@ class Player:
             spalte = gui.getDraw(self.__name)
             return spalte
         elif self.__gameMode == 2:
-            spalte = randint(0, 8)
+            spalte = randint(0, 7)
             print("Spalte: ", spalte)
             return spalte
 
@@ -260,9 +260,12 @@ class RuleSet:
 
         """
         spielfeld = field.getFields()
+        # print(spielfeld[0][col])
         if spielfeld[0][col] != " ":
+            print("Spielzug nicht möglich.Spalte voll.")
             return False
         else:
+            print("Spielzug möglich.")
             return True
 
     def checkPlayerWon(self, field: Field, player: Player) -> bool:
@@ -389,16 +392,40 @@ class FourWinsGame:
         self.__player1.gameMode = gamemode_player1
         self.__player2.name = name_player2
         self.__player2.gameMode = gamemode_player2
-        # print(self.__player1.name)
-        # print(self.__player1.gameMode)
-        # print(self.__player2.name)
-        # print(self.__player2.gameMode)
+        self.__winner = None
 
     def startGame(self):
-        pass
 
+        while True:
+            check_draw_player1 = False
+            draw_player_1 = None
+            while not check_draw_player1:
+                draw_player_1 = self.__player1.playDraw(self.__gui)
+                check_draw_player1 = self.__ruleset.checkDraw(self.__feld, draw_player_1)
 
+            self.__feld.setFields(draw_player_1, self.__player1.playerid)
+            self.__gui.outputField(self.__feld)
+            self.__ruleset.checkGameOver(self.__feld)
+            if self.__ruleset.checkPlayerWon(self.__feld, self.__player1):
+                self.__winner = self.__player1.name
+                break
+
+            check_draw_player2 = False
+            draw_player_2 = None
+            while not check_draw_player2:
+                draw_player_2 = self.__player2.playDraw(self.__gui)
+                check_draw_player2 = self.__ruleset.checkDraw(self.__feld, draw_player_1)
+
+            self.__feld.setFields(draw_player_2, self.__player2.playerid)
+            self.__gui.outputField(self.__feld)
+            self.__ruleset.checkGameOver(self.__feld)
+            if self.__ruleset.checkPlayerWon(self.__feld, self.__player2):
+                self.__winner = self.__player2.name
+                break
+
+        print(f"Herzlichen Glückwunsch {self.__winner}. Gut gespielt! :)")
 
 if __name__ == '__main__':
     game = FourWinsGame("X", "O")
     game.initializeGame()
+    game.startGame()

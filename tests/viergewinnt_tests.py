@@ -37,7 +37,7 @@ class ViergewinntTests(unittest.TestCase):
         -------
         Testergebnis
         """
-        self.Feld1.setFields(1, "X")
+        self.Feld1.setFields(0, "X")
         erg1 = self.Feld1.getFields()
         self.assertEqual(erg1, [[" ", " ", " ", " ", " ", " ", " "],
                          [" ", " ", " ", " ", " ", " ", " "],
@@ -45,7 +45,7 @@ class ViergewinntTests(unittest.TestCase):
                          [" ", " ", " ", " ", " ", " ", " "],
                          [" ", " ", " ", " ", " ", " ", " "],
                          ["X", " ", " ", " ", " ", " ", " "]])
-        self.Feld1.setFields(1, "X")
+        self.Feld1.setFields(0, "X")
         erg2 = self.Feld1.getFields()
         self.assertEqual(erg2, [[" ", " ", " ", " ", " ", " ", " "],
                                 [" ", " ", " ", " ", " ", " ", " "],
@@ -53,9 +53,9 @@ class ViergewinntTests(unittest.TestCase):
                                 [" ", " ", " ", " ", " ", " ", " "],
                                 ["X", " ", " ", " ", " ", " ", " "],
                                 ["X", " ", " ", " ", " ", " ", " "]])
-        self.Feld1.setFields(1, "O")
-        self.Feld1.setFields(1, "O")
-        self.Feld1.setFields(1, "O")
+        self.Feld1.setFields(0, "O")
+        self.Feld1.setFields(0, "O")
+        self.Feld1.setFields(0, "O")
         erg3 = self.Feld1.getFields()
         self.assertEqual(erg3, [[" ", " ", " ", " ", " ", " ", " "],
                                 ["O", " ", " ", " ", " ", " ", " "],
@@ -63,7 +63,7 @@ class ViergewinntTests(unittest.TestCase):
                                 ["O", " ", " ", " ", " ", " ", " "],
                                 ["X", " ", " ", " ", " ", " ", " "],
                                 ["X", " ", " ", " ", " ", " ", " "]])
-        self.Feld1.setFields(1, "O")
+        self.Feld1.setFields(0, "O")
         erg4 = self.Feld1.getFields()
         self.assertEqual(erg4, [["O", " ", " ", " ", " ", " ", " "],
                                 ["O", " ", " ", " ", " ", " ", " "],
@@ -74,14 +74,13 @@ class ViergewinntTests(unittest.TestCase):
 
     def test_valid_col(self):
         """
-        Überprüft, ob ein ValueError angezeigt wird, wenn nicht 1, 2, 3, 4, 5, 6, oder 7 als Spaltenwert übergeben werden.
+        Überprüft, ob ein ValueError angezeigt wird, wenn nicht 0, 2, 3, 4, 5, 6, oder 7 als Spaltenwert übergeben werden.
         Returns
         -------
         Testergebnis
 
         """
-        self.assertRaises(ValueError, self.Feld1.setFields, 0, "X")
-        self.assertRaises(ValueError, self.Feld1.setFields, 8, "X")
+        self.assertRaises(ValueError, self.Feld1.setFields, 7, "X")
         self.assertRaises(TypeError, self.Feld1.setFields, "1", "X")
 
     ###################################################################
@@ -102,7 +101,7 @@ class ViergewinntTests(unittest.TestCase):
     ###################################################################
     # Tests der Klasse RuleSet
     ###################################################################
-    def test_checkDraw(self):
+    def test_checkDraw_pos(self):
         """
         Überprüft, ob ein Zug möglich ist.
 
@@ -112,16 +111,33 @@ class ViergewinntTests(unittest.TestCase):
         Testergebnis
         """
         self.Feld1.setFields(1, "X")
-        self.assertTrue(self.ruleset1.checkDraw(self.Feld1, 0))
+        #self.gui1.outputField(self.Feld1)
+        self.assertTrue(self.ruleset1.checkDraw(self.Feld1, 1))
         self.Feld1.setFields(1, "X")
-        self.assertTrue(self.ruleset1.checkDraw(self.Feld1, 0))
+        self.assertTrue(self.ruleset1.checkDraw(self.Feld1, 1))
         self.Feld1.setFields(1, "X")
-        self.assertTrue(self.ruleset1.checkDraw(self.Feld1, 0))
+        self.assertTrue(self.ruleset1.checkDraw(self.Feld1, 1))
         self.Feld1.setFields(1, "X")
-        self.assertTrue(self.ruleset1.checkDraw(self.Feld1, 0))
+        self.assertTrue(self.ruleset1.checkDraw(self.Feld1, 1))
         self.Feld1.setFields(1, "X")
-        self.assertTrue(self.ruleset1.checkDraw(self.Feld1, 0))
+        self.assertTrue(self.ruleset1.checkDraw(self.Feld1, 1))
         self.Feld1.setFields(1, "X")
+        self.gui1.outputField(self.Feld1)
+
+    def test_checkDraw_neg(self):
+        """
+        Überprüft, ob ein Zug nicht möglich ist, weil Reihe schon voll ist.
+
+        Ein Zug ist nicht möglich, wenn die Reihe schon voll ist.
+        Returns
+        -------
+        Testergebnis
+        """
+        for _ in range(1, 6):
+            self.Feld1.setFields(0, "X")
+        # self.gui1.outputField(self.Feld1)
+        self.Feld1.setFields(0, "X")
+        self.gui1.outputField(self.Feld1)
         self.assertFalse(self.ruleset1.checkDraw(self.Feld1, 0))
 
     def test_checkGameOver(self):
@@ -137,7 +153,7 @@ class ViergewinntTests(unittest.TestCase):
         #self.gui1.outputField(self.Feld1)
         self.assertFalse(self.ruleset1.checkGameOver(self.Feld1))
         for _ in self.Feld1.getFields():
-            for i in range(1, 8):
+            for i in range(0, 7):
                 self.Feld1.setFields(i, "X")
         #self.gui1.outputField(self.Feld1)
         self.assertTrue(self.ruleset1.checkGameOver(self.Feld1))
@@ -196,19 +212,20 @@ class ViergewinntTests(unittest.TestCase):
         -------
         Testergebnis
         """
-        self.Feld1.setFields(1, "X")
+        self.Feld1.setFields(0, "X")
+        # self.gui1.outputField(self.Feld1)
         self.assertFalse(self.ruleset1.checkPlayerWon(self.Feld1, self.Player1))
-        self.Feld1.setFields(1, "O")
+        self.Feld1.setFields(0, "O")
         self.assertFalse(self.ruleset1.checkPlayerWon(self.Feld1, self.Player1))
-        self.Feld1.setFields(1, "X")
+        self.Feld1.setFields(0, "X")
         self.assertFalse(self.ruleset1.checkPlayerWon(self.Feld1, self.Player1))
-        self.Feld1.setFields(1, "X")
+        self.Feld1.setFields(0, "X")
         self.assertFalse(self.ruleset1.checkPlayerWon(self.Feld1, self.Player1))
-        self.Feld1.setFields(1, "X")
+        self.Feld1.setFields(0, "X")
         self.assertFalse(self.ruleset1.checkPlayerWon(self.Feld1, self.Player1))
-        self.Feld1.setFields(1, "X")
+        self.Feld1.setFields(0, "X")
         self.assertTrue(self.ruleset1.checkPlayerWon(self.Feld1, self.Player1))
-        #self.gui1.outputField(self.Feld1)
+        self.gui1.outputField(self.Feld1)
 
     def test_checkPlayerWon_diag_linksoben_nach_rechtsunten_neg1(self):
         """
@@ -261,7 +278,7 @@ class ViergewinntTests(unittest.TestCase):
         -------
         Testergebnis
         """
-        self.Feld1.setFields(7, "X")
+        self.Feld1.setFields(6, "X")
         self.assertFalse(self.ruleset1.checkPlayerWon(self.Feld1, self.Player1))
 
     def test_checkPlayerWon_diag_linksoben_nach_rechtsunten_pos2(self):
@@ -272,10 +289,10 @@ class ViergewinntTests(unittest.TestCase):
         Testergebnis
         """
         for _ in range(1, 4):
-            for i in range(1, 8):
+            for i in range(0, 7):
                 self.Feld1.setFields(i, "X")
         self.Feld1.setFields(4, "X")
-        # self.gui1.outputField(self.Feld1)
+        self.gui1.outputField(self.Feld1)
         self.assertTrue(self.ruleset1.checkPlayerWon(self.Feld1, self.Player1))
 
     def test_checkPlayerWon_diag_rechtsoben_nach_linksunten_neg1(self):
