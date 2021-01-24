@@ -95,9 +95,9 @@ class ViergewinntTests(unittest.TestCase):
 
     def test_getLastRow(self):
         self.Feld1.setFields(1, "X")
-        self.assertEqual(self.Feld1.getLastRow(), 1)
+        self.assertEqual(self.Feld1.getLastRow(), 5)
         self.Feld1.setFields(1, "O")
-        self.assertEqual(self.Feld1.getLastRow(), 2)
+        self.assertEqual(self.Feld1.getLastRow(), 4)
 
     ###################################################################
     # Tests der Klasse RuleSet

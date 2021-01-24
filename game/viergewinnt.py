@@ -46,18 +46,18 @@ class Field:
             raise ValueError("Wähle eine gültige Spalte (1 - 7).")
 
 
-        reihe = 0
+        reihe = 5
         geworfen = False
         for list in reversed(self.__fields):
             if geworfen == False:
                 if list[col-1] == " ":
                     list[col-1] = str(playerid) #Stellt  sicher, dass auch ein str eingetragen wird.
                     #print(reihe)
-                    reihe += 1
+                    #reihe += 1
                     self.__letzte_bespielte_reihe = reihe
                     geworfen = True
                 elif list[col-1] != " ":
-                    reihe += 1
+                    reihe -= 1
                     self.__letzte_bespielte_reihe = reihe
 
 
