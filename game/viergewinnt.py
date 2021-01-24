@@ -303,32 +303,38 @@ class RuleSet:
         # Überprüft die Diagonale von links oben nach rechts unten nach gleichen Spielsteinen.
         counter_diagonale_linksoben_nach_rechtsunten = 0
         for i in range(-3, 4):
-            try:
-
-                if spielfeld[last_set_row+i][last_set_col+i] == player_id:
-                    counter_diagonale_linksoben_nach_rechtsunten += 1
-                    #print(spielfeld[last_set_row + i][last_set_col + i], i,
-                          #counter_diagonale_linksoben_nach_rechtsunten)
-                    if counter_diagonale_linksoben_nach_rechtsunten == 4:
-                        return True
-                elif spielfeld[last_set_row+i][last_set_col+i] != player_id:
+            if (last_set_col + i >= 0) and (last_set_col + i <= 6) and (last_set_row + i >= 0) and (last_set_row + i <= 5):
+                try:
+                    if spielfeld[last_set_row + i][last_set_col + i] == player_id:
+                        counter_diagonale_linksoben_nach_rechtsunten += 1
+                        # print("Check LoRu", spielfeld[last_set_row + i][last_set_col + i], i,
+                        #     counter_diagonale_linksoben_nach_rechtsunten)
+                        if counter_diagonale_linksoben_nach_rechtsunten == 4:
+                            return True
+                    elif spielfeld[last_set_row + i][last_set_col + i] != player_id:
+                        counter_diagonale_linksoben_nach_rechtsunten = 0
+                except IndexError:
                     counter_diagonale_linksoben_nach_rechtsunten = 0
-            except IndexError:
-                continue
+                    # print("test_indexerror LoRu", last_set_row + i, last_set_col + i)
+                    continue
 
-        # Überprüft die Diagonale von rechts oben nach links unten nach gleichen Spielsteinen
+        # Überprüft die Diagonale von links unten nach rechts oben nach gleichen Spielsteinen
         counter_diagonale_rechtsoben_nach_linksunten = 0
-        for i in range(3, -4, -1):
-            try:
-
-                if spielfeld[last_set_row+i][last_set_col+i] == player_id:
-                    counter_diagonale_rechtsoben_nach_linksunten += 1
-                    if counter_diagonale_linksoben_nach_rechtsunten == 4:
-                        return True
-                elif spielfeld[last_set_row+i][last_set_col+i] != player_id:
+        for i in range(-3, 4):
+            if (last_set_col + i >= 0) and (last_set_col + i <= 6) and (last_set_row - i >= 0) and (last_set_row - i <= 5):
+                try:
+                    if spielfeld[last_set_row - i][last_set_col + i] == player_id:
+                        counter_diagonale_rechtsoben_nach_linksunten += 1
+                        # print("Check LuRo", spielfeld[last_set_row - i][last_set_col + i], i,
+                            # counter_diagonale_rechtsoben_nach_linksunten)
+                        if counter_diagonale_rechtsoben_nach_linksunten == 4:
+                            return True
+                    elif spielfeld[last_set_row - i][last_set_col + i] != player_id:
+                            counter_diagonale_rechtsoben_nach_linksunten = 0
+                except IndexError:
                     counter_diagonale_rechtsoben_nach_linksunten = 0
-            except IndexError:
-                continue
+                    # print("test_indexerror LuRo", last_set_row - i, last_set_col + i)
+                    continue
         return False
 
     def checkGameOver(self, field: Field) -> bool:
@@ -352,7 +358,7 @@ class RuleSet:
             for item in list:
                 if item != " ":
                     counter_befuellte_felder += 1
-        print(counter_befuellte_felder)
+        # print(counter_befuellte_felder)
         if counter_befuellte_felder < 42:
             return False
         else:
