@@ -352,7 +352,7 @@ class RuleSet:
             for item in list:
                 if item != " ":
                     counter_befuellte_felder += 1
-        #print(counter_befuellte_felder)
+        print(counter_befuellte_felder)
         if counter_befuellte_felder < 42:
             return False
         else:
@@ -407,9 +407,11 @@ class FourWinsGame:
 
             self.__feld.setFields(draw_player_1, self.__player1.playerid)
             self.__gui.outputField(self.__feld)
-            self.__ruleset.checkGameOver(self.__feld)
+            if self.__ruleset.checkGameOver(self.__feld):
+                print("Das Spielfeld ist voll. Das Spiel ist vorbei")
+                break
             if self.__ruleset.checkPlayerWon(self.__feld, self.__player1):
-                self.__winner = self.__player1.name
+                print(f"Herzlichen Glückwunsch {self.__player1.name}. Gut gespielt! :)")
                 break
 
             check_draw_player2 = False
@@ -417,16 +419,18 @@ class FourWinsGame:
             while not check_draw_player2:
                 draw_player_2 = self.__player2.playDraw(self.__gui)
                 #print(draw_player_2)
-                check_draw_player2 = self.__ruleset.checkDraw(self.__feld, draw_player_1)
+                check_draw_player2 = self.__ruleset.checkDraw(self.__feld, draw_player_2)
 
             self.__feld.setFields(draw_player_2, self.__player2.playerid)
             self.__gui.outputField(self.__feld)
-            self.__ruleset.checkGameOver(self.__feld)
+            if self.__ruleset.checkGameOver(self.__feld):
+                print("Das Spielfeld ist voll. Das Spiel ist vorbei")
+                break
             if self.__ruleset.checkPlayerWon(self.__feld, self.__player2):
-                self.__winner = self.__player2.name
+                print(f"Herzlichen Glückwunsch {self.__player2.name}. Gut gespielt! :)")
                 break
 
-        print(f"Herzlichen Glückwunsch {self.__winner}. Gut gespielt! :)")
+
 
 if __name__ == '__main__':
     game = FourWinsGame("X", "O")
