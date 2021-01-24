@@ -323,8 +323,6 @@ class RuleSet:
                 continue
         return False
 
-
-
     def checkGameOver(self, field: Field) -> bool:
         """
         Überprüft, ob das Spielfeld voll ist.
