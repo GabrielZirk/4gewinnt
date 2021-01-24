@@ -189,9 +189,14 @@ class ViergewinntTests(unittest.TestCase):
         #self.gui1.outputField(self.Feld1)
 
     def test_checkPlayerWon_col1(self):
-        """Überprüft, ob bei 4 aufeinander folgenden gleichen Steinen in einer Spalte True ausgegeben wird."""
+        """
+        Überprüft, ob bei 4 aufeinander folgenden gleichen Steinen in einer Spalte True ausgegeben wird.
+
+        Returns
+        -------
+        Testergebnis
+        """
         self.Feld1.setFields(1, "X")
-        # self.gui1.outputField(self.Feld1)
         self.assertFalse(self.ruleset1.checkPlayerWon(self.Feld1, self.Player1))
         self.Feld1.setFields(1, "O")
         self.assertFalse(self.ruleset1.checkPlayerWon(self.Feld1, self.Player1))
@@ -203,9 +208,124 @@ class ViergewinntTests(unittest.TestCase):
         self.assertFalse(self.ruleset1.checkPlayerWon(self.Feld1, self.Player1))
         self.Feld1.setFields(1, "X")
         self.assertTrue(self.ruleset1.checkPlayerWon(self.Feld1, self.Player1))
-        self.gui1.outputField(self.Feld1)
+        #self.gui1.outputField(self.Feld1)
 
+    def test_checkPlayerWon_diag_linksoben_nach_rechtsunten_neg1(self):
+        """
+        Überprüft, ob in einer Diagonale (links oben nach rechts unten) nicht 4 gleiche Steine liegen.
 
+        Returns
+        -------
+        Testergebnis
+        """
+        self.Feld1.setFields(1, "X")
+        self.Feld1.setFields(1, "X")
+        self.Feld1.setFields(1, "X")
+        self.Feld1.setFields(2, "X")
+        self.Feld1.setFields(1, "O")
+        self.Feld1.setFields(3, "O")
+        self.Feld1.setFields(3, "O")
+        self.Feld1.setFields(2, "O")
+        self.Feld1.setFields(2, "O")
+        #self.gui1.outputField(self.Feld1)
+        self.assertFalse(self.ruleset1.checkPlayerWon(self.Feld1, self.Player2))
+
+    def test_checkPlayerWon_diag_linksoben_nach_rechtsunten_pos1(self):
+        """
+        Überprüft, ob in einer Diagonale (links oben nach rechts unten) 4 gleiche Steine liegen (positives Ergebnis).
+
+        Returns
+        -------
+        Testergebnis
+        """
+        self.Feld1.setFields(1, "X")
+        self.Feld1.setFields(1, "X")
+        self.Feld1.setFields(1, "X")
+        self.Feld1.setFields(2, "X")
+        self.Feld1.setFields(1, "O")
+        self.Feld1.setFields(3, "O")
+        self.Feld1.setFields(3, "O")
+        self.Feld1.setFields(2, "O")
+        self.Feld1.setFields(2, "O")
+        #self.gui1.outputField(self.Feld1)
+        self.Feld1.setFields(4, "O")
+        #self.gui1.outputField(self.Feld1)
+        self.assertTrue(self.ruleset1.checkPlayerWon(self.Feld1, self.Player2))
+        #self.gui1.outputField(self.Feld1)
+
+    def test_checkPlayerWon_diag_linksoben_nach_rechtsunten_neg2(self):
+        """
+        Überprüft, ob in einer Diagonale (links oben nach rechts unten) nicht 4 gleiche Steine liegen.
+
+        Returns
+        -------
+        Testergebnis
+        """
+        self.Feld1.setFields(7, "X")
+        self.assertFalse(self.ruleset1.checkPlayerWon(self.Feld1, self.Player1))
+
+    def test_checkPlayerWon_diag_linksoben_nach_rechtsunten_pos2(self):
+        """
+        Überprüft, ob in einer Diagonale (links oben nach rechts unten) 4 gleiche Steine liegen.
+        Returns
+        -------
+        Testergebnis
+        """
+        for _ in range(1, 4):
+            for i in range(1, 8):
+                self.Feld1.setFields(i, "X")
+        self.Feld1.setFields(4, "X")
+        # self.gui1.outputField(self.Feld1)
+        self.assertTrue(self.ruleset1.checkPlayerWon(self.Feld1, self.Player1))
+
+    def test_checkPlayerWon_diag_rechtsoben_nach_linksunten_neg1(self):
+        """
+        Überprüft, ob in einer Diagonale (rechts oben nach links unten) nicht 4 gleiche Steine liegen (negatives Ergebnis).
+        Returns
+        -------
+        Testergebnis
+        """
+        for _ in range(1, 4):
+            self.Feld1.setFields(4, "O")
+        for _ in range(1, 3):
+            self.Feld1.setFields(3, "O")
+        self.Feld1.setFields(2, "O")
+        # self.gui1.outputField(self.Feld1)
+        self.assertFalse(self.ruleset1.checkPlayerWon(self.Feld1, self.Player2))
+
+    def test_checkPlayerWon_diag_rechtsoben_nach_linksunten_pos1(self):
+        """
+        Überprüft, ob in einer Diagonale (rechts oben nach links unten) 4 gleiche Steine liegen (positives Ergebnis).
+        Returns
+        -------
+        Testergebnis
+        """
+        for _ in range(1, 5):
+            self.Feld1.setFields(5, "O")
+        for _ in range(1, 4):
+            self.Feld1.setFields(4, "O")
+        for _ in range(1, 3):
+            self.Feld1.setFields(3, "O")
+        self.Feld1.setFields(2, "O")
+        # self.gui1.outputField(self.Feld1)
+        self.assertTrue(self.ruleset1.checkPlayerWon(self.Feld1, self.Player2))
+
+    def test_checkPlayerWon_diag_rechtsoben_nach_linksunten_pos2(self):
+        """
+        Überprüft, ob in einer Diagonale (rechts oben nach links unten) 4 gleiche Steine liegen (positives Ergebnis).
+        Returns
+        -------
+        Testergebnis
+        """
+        self.Feld1.setFields(2, "O")
+        for _ in range(1, 4):
+            self.Feld1.setFields(4, "O")
+        for _ in range(1, 3):
+            self.Feld1.setFields(3, "O")
+        for _ in range(1, 5):
+            self.Feld1.setFields(5, "O")
+        # self.gui1.outputField(self.Feld1)
+        self.assertTrue(self.ruleset1.checkPlayerWon(self.Feld1, self.Player2))
 
 if __name__ == '__main__':
     unittest.main()

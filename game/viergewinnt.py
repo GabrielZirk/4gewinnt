@@ -292,7 +292,35 @@ class RuleSet:
             else:
                 counter_spalte = 0
 
+        # Überprüft die Diagonale von links oben nach rechts unten nach gleichen Spielsteinen.
+        counter_diagonale_linksoben_nach_rechtsunten = 0
+        for i in range(-3, 4):
+            try:
 
+                if spielfeld[last_set_row+i][last_set_col+i] == player_id:
+                    counter_diagonale_linksoben_nach_rechtsunten += 1
+                    #print(spielfeld[last_set_row + i][last_set_col + i], i,
+                          #counter_diagonale_linksoben_nach_rechtsunten)
+                    if counter_diagonale_linksoben_nach_rechtsunten == 4:
+                        return True
+                elif spielfeld[last_set_row+i][last_set_col+i] != player_id:
+                    counter_diagonale_linksoben_nach_rechtsunten = 0
+            except IndexError:
+                continue
+
+        # Überprüft die Diagonale von rechts oben nach links unten nach gleichen Spielsteinen
+        counter_diagonale_rechtsoben_nach_linksunten = 0
+        for i in range(3, -4, -1):
+            try:
+
+                if spielfeld[last_set_row+i][last_set_col+i] == player_id:
+                    counter_diagonale_rechtsoben_nach_linksunten += 1
+                    if counter_diagonale_linksoben_nach_rechtsunten == 4:
+                        return True
+                elif spielfeld[last_set_row+i][last_set_col+i] != player_id:
+                    counter_diagonale_rechtsoben_nach_linksunten = 0
+            except IndexError:
+                continue
         return False
 
 
@@ -342,4 +370,4 @@ class FourWinsGame:
 
 
 if __name__ == '__main__':
-    pass
+    print(list(range(3, -4, -1)))
