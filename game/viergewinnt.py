@@ -370,11 +370,6 @@ class FourWinsGame:
         self.__ruleset = RuleSet()
         self.__player1 = Player("alias1", self.__player1id, 2)
         self.__player2 = Player("alias2", self.__player2id, 2)
-        # self.__name_player1 = None
-        # self.__gamemode_player1 = None
-        # self.__name_player2 = None
-        # self.__gamemode_player2 = None
-
 
     def initializeGame(self):
         """
