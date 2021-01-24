@@ -263,7 +263,7 @@ class RuleSet:
         """
         spielfeld = field.getFields()
         # print(spielfeld[0][col])
-        if spielfeld[0][col-1] != " ":
+        if spielfeld[0][col] != " ":
             print("Spielzug nicht möglich.Spalte voll.")
             return False
         else:
