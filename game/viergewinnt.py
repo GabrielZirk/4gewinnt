@@ -395,6 +395,12 @@ class FourWinsGame:
         self.__winner = None
 
     def startGame(self):
+        """
+        Diese Methode leitet durchs spiel. Abwechselnd darf jeder Spieleder seinen Spielstein werfen. Nach jedem Zug wird überprüft, ob das Spielfeld voll ist, bzw. ob ein Spieler gewonnen hat.
+        Returns
+        -------
+        Nichts
+        """
         self.__gui.outputField(self.__feld)
         while True:
             check_draw_player1 = False
