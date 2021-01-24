@@ -265,7 +265,6 @@ class RuleSet:
             print("Spielzug nicht möglich.Spalte voll.")
             return False
         else:
-            print("Spielzug möglich.")
             return True
 
     def checkPlayerWon(self, field: Field, player: Player) -> bool:
