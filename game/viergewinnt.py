@@ -158,7 +158,8 @@ class GUI:
                 if spalte not in valid_cols:
                     print("Achtung: Wähle eine Spalte von 1 bis 7!")
             except ValueError:
-                print("Achtung: Wähle eine Spalte von 1 bis 7!")
+                continue
+                # print("Achtung: Wähle eine Spalte von 1 bis 7!")
         return spalte - 1
 
 class Player:
@@ -233,8 +234,8 @@ class Player:
             spalte = gui.getDraw(self.__name)
             return spalte
         elif self.__gameMode == 2:
-            spalte = randint(0, 7)
-            print("Spalte: ", spalte)
+            spalte = randint(0, 6)
+            print("Computer spielt Spalte: ", spalte + 1)
             return spalte
 
 class RuleSet:
@@ -262,7 +263,7 @@ class RuleSet:
         """
         spielfeld = field.getFields()
         # print(spielfeld[0][col])
-        if spielfeld[0][col] != " ":
+        if spielfeld[0][col-1] != " ":
             print("Spielzug nicht möglich.Spalte voll.")
             return False
         else:
@@ -415,6 +416,7 @@ class FourWinsGame:
             draw_player_2 = None
             while not check_draw_player2:
                 draw_player_2 = self.__player2.playDraw(self.__gui)
+                #print(draw_player_2)
                 check_draw_player2 = self.__ruleset.checkDraw(self.__feld, draw_player_1)
 
             self.__feld.setFields(draw_player_2, self.__player2.playerid)
