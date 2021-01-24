@@ -108,6 +108,7 @@ class GUI:
             print(" | ", list[0], " | ", list[1], " | ", list[2], " | ", list[3], " | ", list[4], " | ", list[5], " | ",
                   list[6], " | ")
             print(" |-----------------------------------------|")
+        print(" |  1  |  2  |  3  |  4  |  5  |  6  |  7  | ")
 
     def getName(self, spielernr: int) -> str:
         """
@@ -394,7 +395,7 @@ class FourWinsGame:
         self.__winner = None
 
     def startGame(self):
-
+        self.__gui.outputField(self.__feld)
         while True:
             check_draw_player1 = False
             draw_player_1 = None
