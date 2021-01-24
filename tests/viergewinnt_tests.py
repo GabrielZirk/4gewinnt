@@ -142,12 +142,70 @@ class ViergewinntTests(unittest.TestCase):
         #self.gui1.outputField(self.Feld1)
         self.assertTrue(self.ruleset1.checkGameOver(self.Feld1))
 
-    def test_checkPlayerWon(self):
-        self.gui1.outputField(self.Feld1)
+    def test_checkPlayerWon_row1(self):
+        """
+        Überprüft, ob bei 4 aufeinander folgenden Steinen in einer Reihe True ausgegeben wird.
+        Returns
+        -------
+        Testergebnis
+
+        """
+        #self.gui1.outputField(self.Feld1)
         self.Feld1.setFields(1, "X")
-        self.gui1.outputField(self.Feld1)
-        self.ruleset1.checkPlayerWon(self.Feld1, self.Player1)
+        #self.gui1.outputField(self.Feld1)
         self.assertFalse(self.ruleset1.checkPlayerWon(self.Feld1, self.Player1))
+        self.Feld1.setFields(2, "X")
+        self.assertFalse(self.ruleset1.checkPlayerWon(self.Feld1, self.Player1))
+        self.Feld1.setFields(3, "X")
+        #self.gui1.outputField(self.Feld1)
+        self.assertFalse(self.ruleset1.checkPlayerWon(self.Feld1, self.Player1))
+        self.Feld1.setFields(4, "X")
+        self.assertTrue(self.ruleset1.checkPlayerWon(self.Feld1, self.Player1))
+        #self.gui1.outputField(self.Feld1)
+
+    def test_checkPlayerWon_row2(self):
+        """
+        Überprüft, ob bei 4 aufeinander folgenden Steinen in einer Reihe True ausgegeben wird.
+        Returns
+        -------
+        Testergebnis
+
+        """
+        #self.gui1.outputField(self.Feld1)
+        self.Feld1.setFields(1, "X")
+        #self.gui1.outputField(self.Feld1)
+        self.assertFalse(self.ruleset1.checkPlayerWon(self.Feld1, self.Player1))
+        self.Feld1.setFields(2, "O")
+        self.assertFalse(self.ruleset1.checkPlayerWon(self.Feld1, self.Player1))
+        self.Feld1.setFields(3, "X")
+        self.assertFalse(self.ruleset1.checkPlayerWon(self.Feld1, self.Player1))
+        self.Feld1.setFields(4, "X")
+        #self.gui1.outputField(self.Feld1)
+        self.assertFalse(self.ruleset1.checkPlayerWon(self.Feld1, self.Player1))
+        self.Feld1.setFields(5, "X")
+        self.assertFalse(self.ruleset1.checkPlayerWon(self.Feld1, self.Player1))
+        self.Feld1.setFields(6, "X")
+        self.assertTrue(self.ruleset1.checkPlayerWon(self.Feld1, self.Player1))
+        #self.gui1.outputField(self.Feld1)
+
+    def test_checkPlayerWon_col1(self):
+        """Überprüft, ob bei 4 aufeinander folgenden gleichen Steinen in einer Spalte True ausgegeben wird."""
+        self.Feld1.setFields(1, "X")
+        # self.gui1.outputField(self.Feld1)
+        self.assertFalse(self.ruleset1.checkPlayerWon(self.Feld1, self.Player1))
+        self.Feld1.setFields(1, "O")
+        self.assertFalse(self.ruleset1.checkPlayerWon(self.Feld1, self.Player1))
+        self.Feld1.setFields(1, "X")
+        self.assertFalse(self.ruleset1.checkPlayerWon(self.Feld1, self.Player1))
+        self.Feld1.setFields(1, "X")
+        self.assertFalse(self.ruleset1.checkPlayerWon(self.Feld1, self.Player1))
+        self.Feld1.setFields(1, "X")
+        self.assertFalse(self.ruleset1.checkPlayerWon(self.Feld1, self.Player1))
+        self.Feld1.setFields(1, "X")
+        self.assertTrue(self.ruleset1.checkPlayerWon(self.Feld1, self.Player1))
+        self.gui1.outputField(self.Feld1)
+
+
 
 if __name__ == '__main__':
     unittest.main()

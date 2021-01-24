@@ -279,18 +279,19 @@ class RuleSet:
                     return True
             elif spielfeld[last_set_row][pos_reihe] != player_id:
                 counter_reihe = 0
-                print(counter_reihe)
+                #print(counter_reihe)
 
 
         # Überprüft die Spalten nach 4 aufeinandernfolgenden Spielsteinen des Spielers
         counter_spalte = 0
         for pos_spalte in range(0, 6):
-            if spielfeld[pos_spalte][last_set_col]:
+            if spielfeld[pos_spalte][last_set_col] == player_id:
                 counter_spalte += 1
+                if counter_spalte == 4:
+                    return True
             else:
                 counter_spalte = 0
-            if counter_spalte == 4:
-                return True
+
 
         return False
 
