@@ -207,6 +207,10 @@ class Player:
     def gameMode(self):
         return self.__gameMode
 
+    @gameMode.setter
+    def gameMode(self, value):
+        self.__gameMode = value
+
     def playDraw(self, gui: GUI) -> int:
         """
         Führt den Spielzug aus.
@@ -355,12 +359,40 @@ class FourWinsGame:
     Erstellt das Spiel.
     """
 
-    def __init__(self,playerid1: Player, playerid2: Player):
-        self.__player1 = playerid1
-        self.__player2 = playerid2
+    def __init__(self, player1id: str, player2id: str):
+        self.__player1id = player1id
+        self.__player2id = player2id
+        self.__feld = Field()
+        self.__gui = GUI()
+        self.__ruleset = RuleSet()
+        self.__player1 = Player("alias1", self.__player1id, 2)
+        self.__player2 = Player("alias2", self.__player2id, 2)
+        # self.__name_player1 = None
+        # self.__gamemode_player1 = None
+        # self.__name_player2 = None
+        # self.__gamemode_player2 = None
+
 
     def initializeGame(self):
-        pass
+        """
+        Fragt nach Name und gameMode der Spieler 1 und 2.
+
+        Returns
+        -------
+        Nichts
+        """
+        name_player1 = self.__gui.getName(1)
+        gamemode_player1 = self.__gui.getGameMode(name_player1)
+        name_player2 = self.__gui.getName(2)
+        gamemode_player2 = self.__gui.getGameMode(name_player2)
+        self.__player1.name = name_player1
+        self.__player1.gameMode = gamemode_player1
+        self.__player2.name = name_player2
+        self.__player2.gameMode = gamemode_player2
+        # print(self.__player1.name)
+        # print(self.__player1.gameMode)
+        # print(self.__player2.name)
+        # print(self.__player2.gameMode)
 
     def startGame(self):
         pass
@@ -368,4 +400,5 @@ class FourWinsGame:
 
 
 if __name__ == '__main__':
-    print(list(range(3, -4, -1)))
+    game = FourWinsGame("X", "O")
+    game.initializeGame()
