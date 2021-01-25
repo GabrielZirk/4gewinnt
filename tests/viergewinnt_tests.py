@@ -122,7 +122,7 @@ class ViergewinntTests(unittest.TestCase):
         self.Feld1.setFields(1, "X")
         self.assertTrue(self.ruleset1.checkDraw(self.Feld1, 1))
         self.Feld1.setFields(1, "X")
-        self.gui1.outputField(self.Feld1)
+        # self.gui1.outputField(self.Feld1)
 
     def test_checkDraw_neg(self):
         """
@@ -137,7 +137,7 @@ class ViergewinntTests(unittest.TestCase):
             self.Feld1.setFields(0, "X")
         # self.gui1.outputField(self.Feld1)
         self.Feld1.setFields(0, "X")
-        self.gui1.outputField(self.Feld1)
+        # self.gui1.outputField(self.Feld1)
         self.assertFalse(self.ruleset1.checkDraw(self.Feld1, 0))
 
     def test_checkGameOver(self):
@@ -225,7 +225,7 @@ class ViergewinntTests(unittest.TestCase):
         self.assertFalse(self.ruleset1.checkPlayerWon(self.Feld1, self.Player1))
         self.Feld1.setFields(0, "X")
         self.assertTrue(self.ruleset1.checkPlayerWon(self.Feld1, self.Player1))
-        self.gui1.outputField(self.Feld1)
+        # self.gui1.outputField(self.Feld1)
 
     def test_checkPlayerWon_diag_linksoben_nach_rechtsunten_neg1(self):
         """
@@ -292,7 +292,7 @@ class ViergewinntTests(unittest.TestCase):
             for i in range(0, 7):
                 self.Feld1.setFields(i, "X")
         self.Feld1.setFields(4, "X")
-        self.gui1.outputField(self.Feld1)
+        # self.gui1.outputField(self.Feld1)
         self.assertTrue(self.ruleset1.checkPlayerWon(self.Feld1, self.Player1))
 
     def test_checkPlayerWon_diag_rechtsoben_nach_linksunten_neg1(self):
