@@ -87,10 +87,10 @@ class ViergewinntTests(unittest.TestCase):
     # Tests der Klasse GUI
     ###################################################################
     def test_valid_gameMode(self):
-        self.assertEquals(str, type(self.gui1.getName(1)))
+        self.assertEqual(str, type(self.gui1.getName(1)))
 
     def test_gameMode(self):
-        self.assertEquals(int, type(self.gui1.getGameMode("testuser")))
+        self.assertEqual(int, type(self.gui1.getGameMode("testuser")))
 
     def test_getLastRow(self):
         self.Feld1.setFields(1, "X")
