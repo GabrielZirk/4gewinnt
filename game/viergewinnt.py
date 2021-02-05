@@ -264,7 +264,7 @@ class RuleSet:
         spielfeld = field.getFields()
         # print(spielfeld[0][col])
         if spielfeld[0][col] != " ":
-            print("Spielzug nicht möglich.Spalte voll.")
+            print("Spielzug nicht möglich. Spalte voll.")
             return False
         else:
             return True
@@ -277,7 +277,7 @@ class RuleSet:
         spielfeld = field.getFields()
         player_id = player.playerid
 
-        #Überprüft die Reihen nach 4 aufeinandernfolgenden Spielsteinen des Spielers
+        #Überprüft die Reihen nach 4 aufeinanderfolgenden Spielsteinen des Spielers
         counter_reihe = 0
         for pos_reihe in range(0, 7):
             # print(spielfeld[0][0])
@@ -290,7 +290,7 @@ class RuleSet:
                 #print(counter_reihe)
 
 
-        # Überprüft die Spalten nach 4 aufeinandernfolgenden Spielsteinen des Spielers
+        # Überprüft die Spalten nach 4 aufeinanderfolgenden Spielsteinen des Spielers
         counter_spalte = 0
         for pos_spalte in range(0, 6):
             if spielfeld[pos_spalte][last_set_col] == player_id:
@@ -398,7 +398,7 @@ class FourWinsGame:
 
     def startGame(self):
         """
-        Diese Methode leitet durchs spiel. Abwechselnd darf jeder Spieleder seinen Spielstein werfen. Nach jedem Zug wird überprüft, ob das Spielfeld voll ist, bzw. ob ein Spieler gewonnen hat.
+        Diese Methode leitet durchs Spiel. Abwechselnd darf jeder Spieler seinen Spielstein werfen. Nach jedem Zug wird überprüft, ob das Spielfeld voll ist, bzw. ob ein Spieler gewonnen hat.
         Returns
         -------
         Nichts
