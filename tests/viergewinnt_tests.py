@@ -142,7 +142,7 @@ class ViergewinntTests(unittest.TestCase):
 
     def test_checkGameOver(self):
         """
-        Überprüft, ob es noch freie Felder auf dem Spielfeld sind.
+        Überprüft, ob noch freie Felder auf dem Spielfeld sind.
 
         Befinden sich noch leere Felder auf dem Spielfeld wird False übergeben, ist das Spielfeld voll True.
 

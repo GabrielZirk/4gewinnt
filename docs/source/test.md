@@ -1,5 +1,3 @@
-# 4Gewinnt - Tests
+# 4-Gewinnt - Tests
 
-Hier werden wir unsere Tests beschreiben. 
-
-* Warum waren 100% Testcoverage nicht möglich?
+Getestet wurde auf Basis der 4 Klassen **Player**, **GUI**, **Field** und **RuleSet**.
