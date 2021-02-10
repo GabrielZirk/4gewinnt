@@ -132,7 +132,7 @@ class GUI:
         Parameters
         ----------
         name: str
-            Der Name des Spielers würd übergeben, damit er angesprochen werden kann.
+            Der Name des Spielers wird übergeben, damit er angesprochen werden kann.
 
         Returns
         -------
@@ -150,6 +150,18 @@ class GUI:
         return int(spielmodus)
 
     def getDraw(self, name: str):
+        """
+        Die Methode nimmt den gewünschten Spielzug entgegen und überprüft, ob der eingegebene Wert den erlaubten Werten entspricht
+        Parameters
+        ----------
+        name: str
+        Der zuvor übergebene Name des Spielers (bzw. "Computer") wird in die Spielzug-Aufforderung übergeben
+
+        Returns
+        -------
+        Spalte
+
+        """
         spalte = 0
         valid_cols = [1, 2, 3, 4, 5, 6, 7]
         while spalte not in valid_cols:
@@ -228,7 +240,7 @@ class Player:
 
         Returns
         -------
-        `spalte`
+        Spalte
         """
         if self.__gameMode == 1:
             spalte = gui.getDraw(self.__name)
@@ -240,7 +252,7 @@ class Player:
 
 class RuleSet:
     """
-    Erzeugt das Regelwerk des Spiels 4gewinnt.
+    Erzeugt das Regelwerk des Spiels.
     """
 
     def checkDraw(self, field: Field, col: int) -> bool:
@@ -270,6 +282,22 @@ class RuleSet:
             return True
 
     def checkPlayerWon(self, field: Field, player: Player) -> bool:
+        """
+        Die Methode überprüft, ob einer der Spieler gewonnen hat, indem die einzelnen Reihen gecheckt werden
+
+        Parameters
+        ----------
+        field: Field
+        Das übergebene Spielfeld wird überprüft.
+
+        player: Player
+        Der Spieler wird übergeben (Mensch oder Computer).
+
+        Returns
+        -------
+        True oder False.
+
+        """
         last_set_row = field.getLastRow()
         # print("letzte gesetzte reihe: ",last_set_row)
         last_set_col = field.getLastCol()

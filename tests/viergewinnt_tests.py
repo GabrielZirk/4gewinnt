@@ -1,8 +1,5 @@
 import unittest
-from game.viergewinnt import Player
-from game.viergewinnt import Field
-from game.viergewinnt import GUI
-from game.viergewinnt import RuleSet
+from game.viergewinnt import Player, Field, GUI, RuleSet
 
 class ViergewinntTests(unittest.TestCase):
 
