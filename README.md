@@ -10,7 +10,7 @@ Das Modell und der Programmcode sind im Rahmen der LV *Softwareentwicklungsmodel
 Um das Spiel zu starten, wird der Code einfach in einem Python-Editor, z.B. PyCharm geöffnet und mit „Run“ gestartet. Das Spiel bzw. der Output erfolgt in der Konsole. Bei Aufruf über die URL <https://gabrielzirk.github.io/viergewinnt.html> erscheint das Spiel in einer webbasierten Konsole und kann mit Klick auf Play (grüner Pfeil) gestartet werden. Anschließend den Instruktionen am Bildschirm folgen.
 
 ### Quellen & Links
-Bei den Überlegungen zur Umsetzung des Spiels haben wir einige Quellen herangezogen.
+Bei den Überlegungen zur Umsetzung des Spiels haben wir folgende Quellen zur Unterstützung herangezogen.
 * Doberkat, E. (2018): Python 3. Ein Lern- und Arbeitsbuch. Berlin/Boston: De Gruyter.
 * Ernesti, J. / Kaiser, P. (2020): Python 3. Das umfassende Handbuch. Bonn: Rheinwerk.  
 * https://www.python-forum.de/
