@@ -6,8 +6,8 @@
 
 **Antwort:**
 
-Um gute Software zu beschreiben, gibt es einige sog. Design Prinzipien, deren Erfüllung die Qualität des Programmcodes erhöht. Im Bereich des objektorientierten Software-Designs kann beispielsweise nach den 5 sog. SOLID-Prinzipien gearbeitet werden. Im vorliegenden Beispiel wird es uns erschwert, den Code in angemessener Weise zu warten – Änderungen und Fehlerkorrekturen, auch die Erweiterung des Codes wird uns durch seine Unübersichtlichkeit und fehlende Dokumentation erschwert. Dadurch ergeben sich für uns große Probleme beim Verstehen des Codes. Ein zentrales Prinzip des Software Designs ist das sog. ***KISS** – Keep it simple and stupid/small*. In diesem Fall könnte man von einer Verletzung dieses grundlegenden Prinzips sprechen.
-Wichtig ist, dass stets auch eine geeignete und ausreichende Dokumentation zum Code geschrieben wird, damit dieser auch in weiterer Folge von anderen Personen verwendet und verstanden werden kann. 
+Um gute Software zu beschreiben, gibt es einige sog. Design Prinzipien, deren Erfüllung die Qualität des Programmcodes erhöhen. Im Bereich des objektorientierten Software-Designs kann beispielsweise nach den 5 sog. *SOLID-Prinzipien* gearbeitet werden. Im vorliegenden Beispiel wird es uns erschwert, den Code in angemessener Weise zu warten – Änderungen und Fehlerkorrekturen, auch die Erweiterung des Codes wird uns durch seine Unübersichtlichkeit und fehlende Dokumentation erschwert. Dadurch ergeben sich für uns große Probleme beim Verstehen des Codes. Ein zentrales Prinzip des Software Designs ist das sog. ***KISS** – Keep it simple and stupid/small*. In diesem Fall könnte man von einer Verletzung dieses grundlegenden Prinzips sprechen.
+Wichtig ist, dass stets auch eine geeignete und ausreichende Dokumentation zum Code geschrieben wird, damit dieser auch in weiterer Folge von anderen Personen verwendet, verstanden und erweitert werden kann. 
 
 ---
 
