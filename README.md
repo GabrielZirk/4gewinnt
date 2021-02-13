@@ -16,3 +16,4 @@ Bei den Überlegungen zur Umsetzung des Spiels haben wir folgende Quellen zur Un
 * https://www.python-forum.de/
 * https://stackoverflow.com/ 
 * https://www.inf-schule.de/
+* https://www.python-kurs.eu/kurs.php
